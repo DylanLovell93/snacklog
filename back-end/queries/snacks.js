@@ -10,4 +10,13 @@ const getAllSnacks = async () => {
   }
 };
 
-module.exports = { getAllSnacks };
+const getOneSnack = async (id) => {
+  try {
+    const targetSnack = await db.one('SELECT * FROM snacks WHERE id=$1', id);
+    return targetSnack;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getAllSnacks, getOneSnack };
