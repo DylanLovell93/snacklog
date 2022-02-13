@@ -47,4 +47,30 @@ const updateSnack = async (
   }
 };
 
-module.exports = { getAllSnacks, getOneSnack, deleteSnack, updateSnack };
+const addSnack = async ({
+  name,
+  image,
+  fiber,
+  protein,
+  added_sugar,
+  is_healthy,
+}) => {
+  const queryArr = [name, image, fiber, protein, added_sugar, is_healthy];
+  try {
+    const addedSnack = db.one(
+      'INSERT INTO snacks (name, image, fiber, protein, added_sugar, is_healthy) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      queryArr
+    );
+    return addedSnack;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = {
+  getAllSnacks,
+  getOneSnack,
+  deleteSnack,
+  updateSnack,
+  addSnack,
+};
