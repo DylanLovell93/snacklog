@@ -31,4 +31,20 @@ const deleteSnack = async (id) => {
   }
 };
 
-module.exports = { getAllSnacks, getOneSnack, deleteSnack };
+const updateSnack = async (
+  id,
+  { name, image, fiber, protein, added_sugar, is_healthy }
+) => {
+  const queryArr = [name, image, fiber, protein, added_sugar, is_healthy, id];
+  try {
+    const updatedSnack = db.one(
+      'UPDATE snacks SET WHERE name=$1, image=$2, fiber=$3, protein=$4, added_sugar=$5, is_healthy=$6 id=$7 RETURNING *',
+      queryArr
+    );
+    return updatedSnack;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = { getAllSnacks, getOneSnack, deleteSnack, updateSnack };
