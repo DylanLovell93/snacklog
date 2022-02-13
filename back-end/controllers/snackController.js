@@ -6,13 +6,13 @@ const snackController = express.Router();
 
 //create "/" get route
 snackController.get('/', (_, response) => {
-  response.status(200).json({ route: '/snacks' });
+  response.status(200).json({ route: '/snacks route' });
 });
 
 //create "/:id" get route
-snackController.get('/', (request, response) => {
+snackController.get('/:id', (request, response) => {
   const { id } = request.params;
-  response.status(200).json({ route: `/snacks/${id}` });
+  response.status(200).json({ route: `/snacks/${id} route` });
 });
 
 // export our controller

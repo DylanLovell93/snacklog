@@ -14,11 +14,11 @@ app.use('/snacks', snackController);
 
 // ROUTES
 app.get('/', (_, response) => {
-  response.status(200).json({ route: ' "/" route' });
+  response.status(200).json({ route: "'/' route" });
 });
 
 app.get('*', (_, response) => {
-  response.status(200).json({ route: ' "*" route' });
+  response.status(200).json({ route: "'/*' route" });
 });
 
 // EXPORT
