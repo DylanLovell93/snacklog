@@ -22,9 +22,15 @@ snackController.delete('/:id', (request, response) => {
 });
 
 //create "/" post route
-snackController.post('/:id', (request, response) => {
+snackController.post('/', (request, response) => {
   const { body: newPost } = request;
   response.status(200).json({ route: '/snacks post route' });
+});
+
+//create "/:id" put route
+snackController.put('/:id', (request, response) => {
+  const { id } = request.params;
+  response.status(200).json({ route: `/snacks/${id} put route` });
 });
 
 // export our controller
