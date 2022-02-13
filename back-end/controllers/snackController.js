@@ -15,5 +15,11 @@ snackController.get('/:id', (request, response) => {
   response.status(200).json({ route: `/snacks/${id} route` });
 });
 
+//create "/:id" delete route
+snackController.delete('/:id', (request, response) => {
+  const { id } = request.params;
+  response.status(200).json({ route: `/snacks/${id} delete route` });
+});
+
 // export our controller
 module.exports = snackController;
