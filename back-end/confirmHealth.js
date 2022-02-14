@@ -7,4 +7,4 @@ const confirmHealth = ({ protein, fiber, added_sugar }) => {
   return validInputs ? isHealthy : null;
 };
 
-module.exports = { confirmHealth };
+module.exports = confirmHealth;

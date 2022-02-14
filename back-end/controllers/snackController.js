@@ -15,7 +15,7 @@ const {
 
 //import helper functions
 const { formatSnack } = require('../helpers/helperfuncs');
-const { confirmHealth } = require('../confirmHealth.js');
+const confirmHealth = require('../confirmHealth.js');
 
 //create "/" get route
 snackController.get('/', async (_, response) => {
@@ -52,7 +52,7 @@ snackController.delete('/:id', async (request, response) => {
 //create "/" post route
 snackController.post('/', async (request, response) => {
   const newPost = formatSnack(request.body);
-  console.log(confirmHealth(newPost));
+  newPost.is_healthy = confirmHealth(newPost);
   try {
     const addedSnack = await addSnack(newPost);
     response.status(200).json({ success: true, payload: addedSnack });

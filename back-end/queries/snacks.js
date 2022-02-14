@@ -38,7 +38,7 @@ const updateSnack = async (
   const queryArr = [name, image, fiber, protein, added_sugar, is_healthy, id];
   try {
     const updatedSnack = db.one(
-      'UPDATE snacks SET WHERE name=$1, image=$2, fiber=$3, protein=$4, added_sugar=$5, is_healthy=$6 id=$7 RETURNING *',
+      'UPDATE snacks SET name=$1, image=$2, fiber=$3, protein=$4, added_sugar=$5, is_healthy=$6 WHERE id=$7 RETURNING *',
       queryArr
     );
     return updatedSnack;
