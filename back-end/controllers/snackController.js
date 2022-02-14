@@ -14,6 +14,9 @@ const {
   addSnack,
 } = require('../queries/snacks');
 
+//import helper functions
+const { formatSnack } = require('../helpers/helperfuncs');
+
 //create "/" get route
 snackController.get('/', async (_, response) => {
   try {
@@ -47,9 +50,14 @@ snackController.delete('/:id', async (request, response) => {
 });
 
 //create "/" post route
-snackController.post('/', (request, response) => {
-  const { body: newPost } = request;
-  response.status(200).json({ route: '/snacks post route' });
+snackController.post('/', async (request, response) => {
+  const newPost = formatSnack(request.body);
+  try {
+    const addedSnack = await addSnack(newPost);
+    response.status(200).json({ success: true, payload: addedSnack });
+  } catch (error) {
+    response.status(500).json({ success: false });
+  }
 });
 
 //create "/:id" put route
