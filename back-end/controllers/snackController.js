@@ -4,33 +4,74 @@ const express = require('express');
 //create our controller
 const snackController = express.Router();
 
+//import db queries
+const {
+  getAllSnacks,
+  getOneSnack,
+  deleteSnack,
+  updateSnack,
+  addSnack,
+} = require('../queries/snacks');
+
+//import helper functions
+const { formatSnack } = require('../helpers/helperfuncs');
+const confirmHealth = require('../confirmHealth.js');
+
 //create "/" get route
-snackController.get('/', (_, response) => {
-  response.status(200).json({ route: '/snacks get route' });
+snackController.get('/', async (_, response) => {
+  try {
+    const allSnacks = await getAllSnacks();
+    response.status(200).json({ success: true, payload: allSnacks });
+  } catch (error) {
+    response.status(404).json({ success: false, payload: error });
+  }
 });
 
 //create "/:id" get route
-snackController.get('/:id', (request, response) => {
+snackController.get('/:id', async (request, response) => {
   const { id } = request.params;
-  response.status(200).json({ route: `/snacks/${id} get route` });
+  try {
+    const targetSnack = await getOneSnack(id);
+    response.status(200).json({ success: true, payload: targetSnack });
+  } catch (error) {
+    response.status(404).json({ success: false, payload: 'not found' });
+  }
 });
 
 //create "/:id" delete route
-snackController.delete('/:id', (request, response) => {
+snackController.delete('/:id', async (request, response) => {
   const { id } = request.params;
-  response.status(200).json({ route: `/snacks/${id} delete route` });
+  try {
+    const deletedSnack = await deleteSnack(id);
+    response.status(200).json({ success: true, payload: deletedSnack });
+  } catch (error) {
+    response.status(404).json({ success: false, payload: 'not found' });
+  }
 });
 
 //create "/" post route
-snackController.post('/', (request, response) => {
-  const { body: newPost } = request;
-  response.status(200).json({ route: '/snacks post route' });
+snackController.post('/', async (request, response) => {
+  const newPost = formatSnack(request.body);
+  newPost.is_healthy = confirmHealth(newPost);
+  try {
+    const addedSnack = await addSnack(newPost);
+    response.status(200).json({ success: true, payload: addedSnack });
+  } catch (error) {
+    response.status(500).json({ success: false });
+  }
 });
 
 //create "/:id" put route
-snackController.put('/:id', (request, response) => {
+snackController.put('/:id', async (request, response) => {
   const { id } = request.params;
-  response.status(200).json({ route: `/snacks/${id} put route` });
+  const newPost = formatSnack(request.body);
+  newPost.is_healthy = confirmHealth(newPost);
+  try {
+    const editedPost = await updateSnack(id, newPost);
+    response.status(200).json({ success: true, payload: editedPost });
+  } catch (error) {
+    response.status(404).json({ success: false, payload: error });
+  }
 });
 
 // export our controller

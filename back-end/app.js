@@ -14,7 +14,7 @@ app.use('/snacks', snackController);
 
 // ROUTES
 app.get('/', (_, response) => {
-  response.status(200).json({ route: "'/' get route" });
+  response.status(200).send("Get Snack'n at Snack-a-log!");
 });
 
 app.get('*', (_, response) => {
