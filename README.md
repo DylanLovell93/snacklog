@@ -5,4 +5,5 @@
 
 ## Deployment
 
-[Here is the link to our deployment](https://www.google.com)
+[Here is the link to our front end deployment](https://snackalong-vd.netlify.app)
+[Here is the link to our back end deployment](https://snackalong-backend-2.herokuapp.com)
