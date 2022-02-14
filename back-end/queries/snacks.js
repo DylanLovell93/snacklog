@@ -6,7 +6,7 @@ const getAllSnacks = async () => {
     const allSnacks = await db.any('SELECT * FROM snacks');
     return allSnacks;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
@@ -15,7 +15,7 @@ const getOneSnack = async (id) => {
     const targetSnack = await db.one('SELECT * FROM snacks WHERE id=$1', id);
     return targetSnack;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -27,7 +27,7 @@ const deleteSnack = async (id) => {
     );
     return deletedSnack;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
@@ -43,7 +43,7 @@ const updateSnack = async (
     );
     return updatedSnack;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
@@ -63,7 +63,7 @@ const addSnack = async ({
     );
     return addedSnack;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
