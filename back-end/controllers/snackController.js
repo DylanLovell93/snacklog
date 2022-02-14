@@ -18,9 +18,9 @@ const {
 snackController.get('/', async (_, response) => {
   try {
     const allSnacks = await getAllSnacks();
-    response.status(200).json(allSnacks);
+    response.status(200).json({ success: true, payload: allSnacks });
   } catch (error) {
-    response.status(500).json(error);
+    response.status(404).json({ success: false, payload: error });
   }
 });
 
