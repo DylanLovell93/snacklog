@@ -36,9 +36,14 @@ snackController.get('/:id', async (request, response) => {
 });
 
 //create "/:id" delete route
-snackController.delete('/:id', (request, response) => {
+snackController.delete('/:id', async (request, response) => {
   const { id } = request.params;
-  response.status(200).json({ route: `/snacks/${id} delete route` });
+  try {
+    const deletedSnack = await deleteSnack(id);
+    response.status(200).json({ success: true, payload: deletedSnack });
+  } catch (error) {
+    response.status(404).json({ success: false, payload: 'not found' });
+  }
 });
 
 //create "/" post route
