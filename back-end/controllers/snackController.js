@@ -1,6 +1,5 @@
 // import express
 const express = require('express');
-const res = require('express/lib/response');
 
 //create our controller
 const snackController = express.Router();
@@ -16,6 +15,7 @@ const {
 
 //import helper functions
 const { formatSnack } = require('../helpers/helperfuncs');
+const { confirmHealth } = require('../confirmHealth.js');
 
 //create "/" get route
 snackController.get('/', async (_, response) => {
@@ -52,6 +52,7 @@ snackController.delete('/:id', async (request, response) => {
 //create "/" post route
 snackController.post('/', async (request, response) => {
   const newPost = formatSnack(request.body);
+  console.log(confirmHealth(newPost));
   try {
     const addedSnack = await addSnack(newPost);
     response.status(200).json({ success: true, payload: addedSnack });
@@ -61,9 +62,16 @@ snackController.post('/', async (request, response) => {
 });
 
 //create "/:id" put route
-snackController.put('/:id', (request, response) => {
+snackController.put('/:id', async (request, response) => {
   const { id } = request.params;
-  response.status(200).json({ route: `/snacks/${id} put route` });
+  const newPost = formatSnack(request.body);
+  newPost.is_healthy = confirmHealth(newPost);
+  try {
+    const editedPost = await updateSnack(id, newPost);
+    response.status(200).json({ success: true, payload: editedPost });
+  } catch (error) {
+    response.status(404).json({ success: false, payload: error });
+  }
 });
 
 // export our controller
