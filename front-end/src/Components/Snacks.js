@@ -7,8 +7,11 @@ function Snacks() {
   const [snacks, setSnacks] = useState([]);
   useEffect(() => {
     axios
-      .get(`${API}/snack`)
-      .then((response) => setSnacks(response.data))
+      .get(`${API}/snacks`)
+      .then((response) => {
+        console.log(response.data);
+        setSnacks(response.data.payload);
+      })
       .catch((error) => console.warn(error));
   }, [API]);
 

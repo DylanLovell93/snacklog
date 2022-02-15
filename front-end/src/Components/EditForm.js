@@ -17,7 +17,7 @@ function EditForm() {
 
   const updateSnack = (updatedSnack) => {
     axios
-      .put(`${API}/snack/${id}`, updatedSnack)
+      .put(`${API}/snacks/${id}`, updatedSnack)
       .then(
         () => {
           navigate(`/snacks/${id}`);
@@ -32,8 +32,8 @@ function EditForm() {
   };
 
   useEffect(() => {
-    axios.get(`${API}/snack/${id}`).then(
-      (response) => setSnack(response.data),
+    axios.get(`${API}/snacks/${id}`).then(
+      (response) => setSnack(response.data.payload),
       () => navigate(`/not-found`)
     );
   }, [id, navigate]);
@@ -60,6 +60,7 @@ function EditForm() {
           type="text"
           value={snack.fiber}
           onChange={handleTextChange}
+          placeholder="Amount of Fiber"
         />
         <label htmlFor="Protein">Protein:</label>
         <input
@@ -67,13 +68,15 @@ function EditForm() {
           type="text"
           value={snack.protein}
           onChange={handleTextChange}
+          placeholder="Amount of Protein"
         />
-        <label htmlFor="Added Sugar">Added Sugr:</label>
+        <label htmlFor="Added Sugar">Added Sugar:</label>
         <input
-          id="added sugar"
+          id="added_sugar"
           type="text"
           value={snack.added_sugar}
           onChange={handleTextChange}
+          placeholder="Amount of Added Sugar"
         />
 
         <br />

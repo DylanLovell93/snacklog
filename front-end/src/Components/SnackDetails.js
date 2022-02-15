@@ -10,14 +10,14 @@ function SnackDetails() {
 
   useEffect(() => {
     axios
-      .get(`${API}/snack/${id}`)
-      .then((response) => setSnack(response.data))
+      .get(`${API}/snacks/${id}`)
+      .then((response) => setSnack(response.data.payload))
       .catch((error) => console.warn(error));
-  }, [id]);
+  }, [id, API]);
 
   const handleDelete = () => {
     axios
-      .delete(`${API}/snack/${id}`)
+      .delete(`${API}/snacks/${id}`)
       .then(
         () => {
           console.log("testing");
@@ -31,8 +31,10 @@ function SnackDetails() {
   return (
     <article>
       <h4>{snack.name}</h4>
-      <p>{snack.image}</p>
-      <p>{snack.is_healthy}</p>
+      <p>
+        <img src={snack.image} />
+      </p>
+      <p>{snack.is_healthy ? "true" : "false"}</p>
       <div className="showNavigation">
         <div>
           <Link to="/snacks">
