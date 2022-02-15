@@ -9,7 +9,7 @@ function NewForm() {
 
   const addSnack = (newSnack) => {
     axios
-      .post(`${API}/snack/new`, newSnack)
+      .post(`${API}/snacks`, newSnack)
       .then(
         () => {
           navigate(`/snacks`);
@@ -31,9 +31,9 @@ function NewForm() {
     setSnack({ ...snack, [event.target.id]: event.target.value });
   };
 
-  const handleCheckboxChange = () => {
-    setSnack({ ...snack, is_healthy: !snack.is_healthy });
-  };
+  //const handleCheckboxChange = () => {
+  // setSnack({ ...snack, is_healthy: !snack.is_healthy });
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,7 +53,7 @@ function NewForm() {
         />
         <label htmlFor="fiber">FIBER:</label>
         <input
-          id="Fiber"
+          id="fiber"
           type="text"
           value={snack.fiber}
           onChange={handleTextChange}
@@ -61,7 +61,7 @@ function NewForm() {
         />
         <label htmlFor="protein">PROTEIN:</label>
         <input
-          id="Protein"
+          id="protein"
           type="text"
           value={snack.protein}
           onChange={handleTextChange}
@@ -69,7 +69,7 @@ function NewForm() {
         />
         <label htmlFor="added_sugar">ADDED SUGAR:</label>
         <input
-          id="Added_Sugar"
+          id="added_sugar"
           type="text"
           value={snack.added_sugar}
           onChange={handleTextChange}
