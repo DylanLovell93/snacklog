@@ -10,6 +10,7 @@
     "db:init": "psql -U postgres -f db/schema.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
     "dbreset": "psql -U postgres -f db/schema.sql && psql -U postgres -f db/seed.sql",
+    "dbvreset": "psql vanessaconti -f db/schema.sql && psql vanessaconti -f db/seed.sql",
     "start": "node server.js",
     "test": "jest --runInBand"
   },
