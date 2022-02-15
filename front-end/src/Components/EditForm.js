@@ -33,7 +33,7 @@ function EditForm() {
 
   useEffect(() => {
     axios.get(`${API}/snack/${id}`).then(
-      (response) => setAnime(response.data),
+      (response) => setSnack(response.data),
       () => navigate(`/not-found`)
     );
   }, [id, navigate]);
