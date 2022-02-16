@@ -20,7 +20,7 @@ function EditForm() {
       .put(`${API}/snacks/${id}`, updatedSnack)
       .then(
         () => {
-          navigate(`/snacks/${id}`);
+          navigate(`/snacks`);
         },
         (error) => console.error(error)
       )
@@ -44,6 +44,13 @@ function EditForm() {
   };
   return (
     <div className="Edit">
+      <label htmlFor="image">Image</label>
+      <input
+        id="image"
+        value={snack.image}
+        type="text"
+        onChange={handleTextChange}
+      />
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input
@@ -54,26 +61,26 @@ function EditForm() {
           placeholder="Name of Snack"
           required
         />
-        <label htmlFor="Fiber">Fiber:</label>
+        <label htmlFor="fiber">Fiber:</label>
         <input
           id="fiber"
-          type="text"
+          type="number"
           value={snack.fiber}
           onChange={handleTextChange}
           placeholder="Amount of Fiber"
         />
-        <label htmlFor="Protein">Protein:</label>
+        <label htmlFor="protein">Protein:</label>
         <input
           id="protein"
-          type="text"
+          type="number"
           value={snack.protein}
           onChange={handleTextChange}
           placeholder="Amount of Protein"
         />
-        <label htmlFor="Added Sugar">Added Sugar:</label>
+        <label htmlFor="added_sugar">Added Sugar:</label>
         <input
           id="added_sugar"
-          type="text"
+          type="number"
           value={snack.added_sugar}
           onChange={handleTextChange}
           placeholder="Amount of Added Sugar"
@@ -81,10 +88,10 @@ function EditForm() {
 
         <br />
 
-        <input type="submit" />
+        <button type="submit">Submit</button>
       </form>
       <Link to={`/snacks/${id}`}>
-        <button>Nevermind!</button>
+        <button>Back</button>
       </Link>
     </div>
   );
