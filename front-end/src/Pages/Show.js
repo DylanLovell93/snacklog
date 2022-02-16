@@ -5,6 +5,7 @@ function Show() {
     <>
       <div className="Show">
         <h2>Show</h2>
+        <h1>Nutritional Snack Facts</h1>
         <SnackDetails />
       </div>
     </>
